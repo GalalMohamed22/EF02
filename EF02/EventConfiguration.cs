@@ -1,0 +1,20 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EF02
+{
+    internal class EventConfiguration : IEntityTypeConfiguration<Event>
+    {
+        public void Configure(EntityTypeBuilder<Event> builder)
+        {
+            builder.HasOne(p => p.Organizer)
+                .WithMany(c => c.Events)
+                .HasForeignKey(e => e.OrganizerId);
+        }
+    }
+}
